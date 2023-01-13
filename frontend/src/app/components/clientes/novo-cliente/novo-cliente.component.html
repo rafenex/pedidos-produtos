@@ -6,10 +6,7 @@
       <div class="field grid">
         <div class="col-12 md:col-6 mb-4">
           <label>Nome</label>
-          <input
-            pInputText
-            class="text-base surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-          />
+          <input pInputText class="p-2 w-full" />
         </div>
 
         <div class="col-12 md:col-6 mb-4">
@@ -21,7 +18,7 @@
             [mask]="getCpfCnpjMask()"
             [(ngModel)]="cpf_cnpj"
             pInputText
-            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+            class="p-2 w-full"
           />
         </div>
 
@@ -32,7 +29,7 @@
             [(ngModel)]="selectedEstado"
             [ngModelOptions]="{ standalone: true }"
             pInputText
-            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary w-full"
+            class="p-2 w-full"
           >
             <option *ngFor="let es of estados" [value]="es['id']">
               {{ es["sigla"] }}
@@ -45,7 +42,7 @@
             [(ngModel)]="selectedCidade"
             [ngModelOptions]="{ standalone: true }"
             pInputText
-            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary w-full"
+            class="p-2 w-full"
           >
             <option *ngFor="let cid of cidades" [value]="cid['nome']">
               {{ cid["nome"] }}
@@ -54,32 +51,19 @@
         </div>
         <div class="col-12 md:col-12 mb-4">
           <label>Bairro</label>
-          <input
-            pInputText
-            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-          />
+          <input pInputText class="p-2 w-full" />
         </div>
         <div class="col-12 md:col-12 mb-4">
           <label>Rua</label>
-          <input
-            pInputText
-            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-          />
+          <input pInputText class="p-2 w-full" />
         </div>
         <div class="col-6 md:col-6 mb-4">
           <label>Número</label>
-          <input
-            pInputText
-            type="number"
-            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-          />
+          <input pInputText type="number" class="p-2 w-full" />
         </div>
         <div class="col-6 md:col-6 mb-4">
           <label>Complemento</label>
-          <input
-            pInputText
-            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-          />
+          <input pInputText class="p-2 w-full" />
         </div>
       </div>
     </div>

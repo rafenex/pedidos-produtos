@@ -16,20 +16,14 @@ export class NavBarComponent {
         icon: 'pi pi-fw pi-book',
         items: [
           {
-            label: 'Left',
-            icon: 'pi pi-fw pi-align-left',
+            label: 'Pedidos',
+            icon: 'pi pi-fw pi-list',
+            routerLink: 'lista-pedidos',
           },
           {
-            label: 'Right',
-            icon: 'pi pi-fw pi-align-right',
-          },
-          {
-            label: 'Center',
-            icon: 'pi pi-fw pi-align-center',
-          },
-          {
-            label: 'Justify',
-            icon: 'pi pi-fw pi-align-justify',
+            label: 'Novo Pedido',
+            icon: 'pi pi-fw pi-plus',
+            routerLink: 'novo-pedido',
           },
         ],
       },
@@ -39,7 +33,7 @@ export class NavBarComponent {
         items: [
           {
             label: 'Catalogo de Produtos',
-            icon: 'pi pi-fw pi-align-right',
+            icon: 'pi pi-fw pi-list',
             routerLink: 'lista-produtos',
           },
           {
@@ -55,21 +49,13 @@ export class NavBarComponent {
         items: [
           {
             label: 'Clientes',
-            icon: 'pi pi-fw pi-align-left',
+            icon: 'pi pi-fw pi-list',
             routerLink: 'lista-clientes',
           },
           {
             label: 'Novo Cliente',
             icon: 'pi pi-fw pi-user-plus',
             routerLink: 'novo-cliente',
-          },
-          {
-            label: 'Center',
-            icon: 'pi pi-fw pi-align-center',
-          },
-          {
-            label: 'Justify',
-            icon: 'pi pi-fw pi-align-justify',
           },
         ],
       },

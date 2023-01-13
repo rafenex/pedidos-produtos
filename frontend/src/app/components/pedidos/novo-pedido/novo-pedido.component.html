@@ -1,0 +1,34 @@
+<p-fieldset legend="Pedido">
+  <form>
+    <div class="field grid">
+      <div class="col-12 md:col-6 mb-4">
+        <label>Cliente</label>
+        <select
+          (ngModelChange)="verCliente($event)"
+          [(ngModel)]="selectedCliente"
+          [ngModelOptions]="{ standalone: true }"
+          pInputText
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary w-full"
+        >
+          <option *ngFor="let cliente of clientes" [ngValue]="cliente">
+            {{ cliente["nome"] }}
+          </option>
+        </select>
+      </div>
+      <div class="col-12 md:col-6 mb-4">
+        <label>Produto</label>
+        <select
+          (ngModelChange)="verProduto($event)"
+          [(ngModel)]="selectedCliente"
+          [ngModelOptions]="{ standalone: true }"
+          pInputText
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary w-full"
+        >
+          <option *ngFor="let produto of produtos" [ngValue]="produto">
+            {{ produto["produto"] }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </form>
+</p-fieldset>

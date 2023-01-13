@@ -24,6 +24,8 @@ import {
 } from 'ngx-mask';
 import { IConfig } from 'ngx-mask';
 import { ListaClientesComponent } from './components/clientes/lista-clientes/lista-clientes.component';
+import { NovoPedidoComponent } from './components/pedidos/novo-pedido/novo-pedido.component';
+import { ListaPedidosComponent } from './components/pedidos/lista-pedidos/lista-pedidos.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -36,6 +38,8 @@ const maskConfig: Partial<IConfig> = {
     NovoProdutoComponent,
     NovoClienteComponent,
     ListaClientesComponent,
+    NovoPedidoComponent,
+    ListaPedidosComponent,
   ],
   imports: [
     BrowserModule,

@@ -28,49 +28,15 @@
       </tr>
 
       <tr>
-        <th>
-          <input
-            pInputText
-            type="text"
-            (input)="dt1.filter($any($event.target)?.value, 'nome', 'contains')"
-            [value]="$any(dt1.filters['nome'])?.value"
-            placeholder="Nome"
-            class="w-full"
-          />
-        </th>
-        <th>
+        <th *ngFor="let col of cols">
           <input
             pInputText
             type="text"
             (input)="
-              dt1.filter($any($event.target)?.value, 'cpf_cnpj', 'contains')
+              dt1.filter($any($event.target)?.value, col.field, 'contains')
             "
-            [value]="$any(dt1.filters['cpf_cnpj'])?.value"
-            placeholder="CPF/CNPJ"
-            class="w-full"
-          />
-        </th>
-        <th>
-          <input
-            pInputText
-            type="text"
-            (input)="
-              dt1.filter($any($event.target)?.value, 'telefone', 'contains')
-            "
-            [value]="$any(dt1.filters['cpf_cnpj'])?.value"
-            placeholder="Telefone"
-            class="w-full"
-          />
-        </th>
-        <th>
-          <input
-            pInputText
-            type="text"
-            (input)="
-              dt1.filter($any($event.target)?.value, 'endereco', 'contains')
-            "
-            [value]="$any(dt1.filters['endereco'])?.value"
-            placeholder="Endereço"
+            [value]="$any(dt1.filters[col.field])?.value"
+            [placeholder]="col.header"
             class="w-full"
           />
         </th>
