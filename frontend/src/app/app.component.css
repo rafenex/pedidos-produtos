@@ -1,14 +1,16 @@
 :host ::ng-deep .p-fieldset-legend {
   background: var(--bluegray-900);
-  border: 1px solid var(--bluegray-100);
+  border: 0;
 }
 
 :host ::ng-deep .p-fieldset {
-  background: var(--bluegray-900);
+  color: var(--bluegray-100);
+  background: var(--bluegray-800);
+  border: 0;
 }
 
 :host ::ng-deep .p-inputtext {
-  background: var(--bluegray-700);
+  background: var(--bluegray-900);
   border: 0;
 }
 
@@ -18,10 +20,32 @@
 }
 
 ::ng-deep .p-panelmenu .p-panelmenu-content {
-  background-color: var(--bluegray-900);
+  background: var(--bluegray-900);
   border: 0;
 }
 
 ::ng-deep .p-panelmenu .p-panelmenu-header.p-highlight > a {
-  background-color: var(--bluegray-700);
+  background-color: var(--bluegray-900);
+}
+
+::ng-deep .p-panelmenu .p-menuitem-content {
+  color: var(--bluegray-900);
+}
+
+::ng-deep
+  .p-panelmenu
+  .p-panelmenu-content
+  .p-menuitem
+  .p-menuitem-link
+  .p-menuitem-text {
+  color: var(--bluegray-100);
+}
+
+::ng-deep
+  .p-panelmenu
+  .p-panelmenu-content
+  .p-menuitem
+  .p-menuitem-link
+  .p-menuitem-icon {
+  color: var(--bluegray-100);
 }

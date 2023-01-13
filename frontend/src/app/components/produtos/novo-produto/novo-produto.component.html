@@ -6,18 +6,12 @@
       <div class="field grid">
         <div class="col-12 md:col-6 mb-4">
           <label>Referência</label>
-          <input
-            pInputText
-            class="text-base surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-          />
+          <input pInputText class="p-2 w-full" />
         </div>
 
         <div class="col-12 md:col-6 mb-4">
           <label>Produto</label>
-          <input
-            pInputText
-            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-          />
+          <input pInputText class="p-2 w-full" />
         </div>
 
         <div class="col-12 md:col-6 mb-4">
@@ -26,18 +20,14 @@
             [(ngModel)]="selectedCategoria"
             [ngModelOptions]="{ standalone: true }"
             pInputText
-            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary w-full"
+            class="p-2 w-full"
           >
             <option *ngFor="let cat of categorias">{{ cat.name }}</option>
           </select>
         </div>
         <div class="col-12 md:col-6 mb-4">
           <label>Preço</label>
-          <input
-            type="number"
-            pInputText
-            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-          />
+          <input type="number" pInputText class="p-2 w-full" />
         </div>
       </div>
     </div>

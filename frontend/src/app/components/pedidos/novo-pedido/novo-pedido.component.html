@@ -8,7 +8,7 @@
           [(ngModel)]="selectedCliente"
           [ngModelOptions]="{ standalone: true }"
           pInputText
-          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary w-full"
+          class="p-2 w-full"
         >
           <option *ngFor="let cliente of clientes" [ngValue]="cliente">
             {{ cliente["nome"] }}
@@ -22,7 +22,7 @@
           [(ngModel)]="selectedCliente"
           [ngModelOptions]="{ standalone: true }"
           pInputText
-          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary w-full"
+          class="p-2 w-full"
         >
           <option *ngFor="let produto of produtos" [ngValue]="produto">
             {{ produto["produto"] }}
