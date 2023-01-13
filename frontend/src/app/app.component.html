@@ -1,0 +1,15 @@
+<div>
+  <ng-template pTemplate="header"> Header content here </ng-template>
+  <router-outlet></router-outlet>
+  <ng-template pTemplate="footer"> Footer content here </ng-template>
+
+  <div class="grid">
+    <div class="col-12 md:col-4 lg:col-3">
+      <app-nav-bar></app-nav-bar>
+    </div>
+    <div class="col-12 md:col-8 lg:col-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="col-12">@rafenex</div>
+</div>

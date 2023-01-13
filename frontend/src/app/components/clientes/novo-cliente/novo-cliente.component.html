@@ -1,0 +1,72 @@
+<p-fieldset>
+  <ng-template pTemplate="header">Novo Cliente</ng-template>
+
+  <form>
+    <div class="card">
+      <div class="field grid">
+        <div class="col-12 md:col-6 mb-4">
+          <label>Nome</label>
+          <input
+            pInputText
+            class="text-base surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+          />
+        </div>
+
+        <div class="col-12 md:col-6 mb-4">
+          <label>CPF/CNPJ</label>
+          <input
+            [ngModelOptions]="{ standalone: true }"
+            matInput
+            type="text"
+            [mask]="getCpfCnpjMask()"
+            [(ngModel)]="cpf_cnpj"
+            pInputText
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+          />
+        </div>
+
+        <div class="col-12 md:col-6 mb-4">
+          <label>Estado</label>
+          <select
+            (ngModelChange)="getCidades($event)"
+            [(ngModel)]="selectedEstado"
+            [ngModelOptions]="{ standalone: true }"
+            pInputText
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary w-full"
+          >
+            <option *ngFor="let es of estados" [value]="es['id']">
+              {{ es["sigla"] }}
+            </option>
+          </select>
+        </div>
+        <div class="col-12 md:col-6 mb-4">
+          <label>Cidade</label>
+          <select
+            [(ngModel)]="selectedCidade"
+            [ngModelOptions]="{ standalone: true }"
+            pInputText
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary w-full"
+          >
+            <option *ngFor="let cid of cidades" [value]="cid['nome']">
+              {{ cid["nome"] }}
+            </option>
+          </select>
+        </div>
+        <div class="col-12 md:col-12 mb-4">
+          <label>Bairro</label>
+          <input
+            pInputText
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+          />
+        </div>
+        <div class="col-12 md:col-12 mb-4">
+          <label>Endereço</label>
+          <input
+            pInputText
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</p-fieldset>

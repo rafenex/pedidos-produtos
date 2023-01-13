@@ -1,0 +1,45 @@
+<p-fieldset>
+  <ng-template pTemplate="header">Novo Produto</ng-template>
+
+  <form>
+    <div class="card">
+      <div class="field grid">
+        <div class="col-12 md:col-6 mb-4">
+          <label>Referência</label>
+          <input
+            pInputText
+            class="text-base surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+          />
+        </div>
+
+        <div class="col-12 md:col-6 mb-4">
+          <label>Produto</label>
+          <input
+            pInputText
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+          />
+        </div>
+
+        <div class="col-12 md:col-6 mb-4">
+          <label>Categoria</label>
+          <select
+            [(ngModel)]="selectedCategoria"
+            [ngModelOptions]="{ standalone: true }"
+            pInputText
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary w-full"
+          >
+            <option *ngFor="let cat of categorias">{{ cat.name }}</option>
+          </select>
+        </div>
+        <div class="col-12 md:col-6 mb-4">
+          <label>Preço</label>
+          <input
+            type="number"
+            pInputText
+            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</p-fieldset>

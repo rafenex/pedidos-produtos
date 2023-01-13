@@ -1,0 +1,88 @@
+<p-fieldset>
+  <ng-template pTemplate="header">Catalogo de Produtos</ng-template>
+  <p-table
+    [value]="produtos"
+    #dt1
+    dataKey="id"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 50]"
+    [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['referencia', 'produto', 'categoria', 'preco']"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="referencia" style="width: 15%">
+          Ref <p-sortIcon field="referencia"></p-sortIcon>
+        </th>
+        <th pSortableColumn="produto" style="width: 25%">
+          Produto <p-sortIcon field="produto"></p-sortIcon>
+        </th>
+        <th pSortableColumn="Categoria" style="width: 25%">
+          Categoria <p-sortIcon field="representative.name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="preco" style="width: 25%">
+          Preço <p-sortIcon field="preco"></p-sortIcon>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <input
+            pInputText
+            type="text"
+            (input)="
+              dt1.filter($any($event.target)?.value, 'referencia', 'contains')
+            "
+            [value]="$any(dt1.filters['referencia'])?.value"
+            placeholder="Ref"
+            class="w-full"
+          />
+        </th>
+        <th>
+          <input
+            pInputText
+            type="text"
+            (input)="
+              dt1.filter($any($event.target)?.value, 'produto', 'contains')
+            "
+            [value]="$any(dt1.filters['produto'])?.value"
+            placeholder="Produto"
+            class="w-full"
+          />
+        </th>
+        <th>
+          <input
+            pInputText
+            type="text"
+            (input)="
+              dt1.filter($any($event.target)?.value, 'categoria', 'contains')
+            "
+            [value]="$any(dt1.filters['categoria'])?.value"
+            placeholder="Categoria"
+            class="w-full"
+          />
+        </th>
+        <th>
+          <input
+            pInputText
+            type="text"
+            (input)="
+              dt1.filter($any($event.target)?.value, 'preco', 'contains')
+            "
+            [value]="$any(dt1.filters['preco'])?.value"
+            placeholder="Preço"
+            class="w-full"
+          />
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-produto>
+      <tr>
+        <td *ngFor="let col of cols">
+          {{ produto[col.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-fieldset>
