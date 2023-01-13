@@ -54,8 +54,9 @@ export class NavBarComponent {
         icon: 'pi pi-fw pi-users',
         items: [
           {
-            label: 'Left',
+            label: 'Clientes',
             icon: 'pi pi-fw pi-align-left',
+            routerLink: 'lista-clientes',
           },
           {
             label: 'Novo Cliente',

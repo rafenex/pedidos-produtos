@@ -23,6 +23,7 @@ import {
   provideEnvironmentNgxMask,
 } from 'ngx-mask';
 import { IConfig } from 'ngx-mask';
+import { ListaClientesComponent } from './components/clientes/lista-clientes/lista-clientes.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -34,6 +35,7 @@ const maskConfig: Partial<IConfig> = {
     ListaProdutoComponent,
     NovoProdutoComponent,
     NovoClienteComponent,
+    ListaClientesComponent,
   ],
   imports: [
     BrowserModule,

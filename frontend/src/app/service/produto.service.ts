@@ -10,8 +10,8 @@ export class ProdutoService {
 
   data: Produto[] = [];
 
-  getCarsSmall() {
-    return this.http
+  async getCarsSmall() {
+    return await this.http
       .get('assets/produtosApi.json')
       .toPromise()
       .then((res: any) => <Produto[]>res.data);

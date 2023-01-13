@@ -26,7 +26,6 @@ export class NovoClienteComponent {
       : this.cpf_cnpj.length < 12
       ? true
       : false;
-    console.log(this.cpf_cnpj.length);
   }
 
   getCpfCnpjMask(): string {
