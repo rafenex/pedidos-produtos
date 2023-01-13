@@ -15,12 +15,12 @@ export class ListaClientesComponent {
   ngOnInit() {
     this.clienteService.getClientes().then((cliente) => {
       this.clientes = cliente;
-      console.log(cliente);
     });
 
     this.cols = [
       { field: 'nome', header: 'Nome' },
       { field: 'cpf_cnpj', header: 'CPF/CNPJ' },
+      { field: 'telefone', header: 'Telefone' },
       { field: 'endereco', header: 'Endereço' },
     ];
   }

@@ -16,10 +16,13 @@
         <th pSortableColumn="nome" style="width: 15%">
           Nome <p-sortIcon field="nome"></p-sortIcon>
         </th>
-        <th pSortableColumn="cliente" style="width: 25%">
+        <th pSortableColumn="cpf_cnpj" style="width: 25%">
           CPF/CNPJ <p-sortIcon field="cpf_cnpj"></p-sortIcon>
         </th>
-        <th pSortableColumn="Categoria" style="width: 25%">
+        <th pSortableColumn="telefone" style="width: 25%">
+          Telefone <p-sortIcon field="telefone"></p-sortIcon>
+        </th>
+        <th pSortableColumn="endereco" style="width: 25%">
           Endereço <p-sortIcon field="endereco"></p-sortIcon>
         </th>
       </tr>
@@ -52,6 +55,18 @@
             pInputText
             type="text"
             (input)="
+              dt1.filter($any($event.target)?.value, 'telefone', 'contains')
+            "
+            [value]="$any(dt1.filters['cpf_cnpj'])?.value"
+            placeholder="Telefone"
+            class="w-full"
+          />
+        </th>
+        <th>
+          <input
+            pInputText
+            type="text"
+            (input)="
               dt1.filter($any($event.target)?.value, 'endereco', 'contains')
             "
             [value]="$any(dt1.filters['endereco'])?.value"
@@ -64,14 +79,8 @@
     <ng-template pTemplate="body" let-cliente>
       <tr>
         <td *ngFor="let col of cols">
-          <span *ngIf="col.field != 'endereco'">
+          <span *ngIf="col.field">
             {{ cliente[col.field] }}
-          </span>
-          <span *ngIf="col.field == 'endereco'">
-            {{ cliente.rua }}, {{ cliente.numero }}
-            {{ cliente.complemento ? "- " + cliente.complemento : "" }} -
-            {{ cliente.cidade }} -
-            {{ cliente.estado }}
           </span>
         </td>
       </tr>
