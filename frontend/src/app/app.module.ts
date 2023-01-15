@@ -26,6 +26,11 @@ import { IConfig } from 'ngx-mask';
 import { ListaClientesComponent } from './components/clientes/lista-clientes/lista-clientes.component';
 import { NovoPedidoComponent } from './components/pedidos/novo-pedido/novo-pedido.component';
 import { ListaPedidosComponent } from './components/pedidos/lista-pedidos/lista-pedidos.component';
+import { DialogModule } from 'primeng/dialog';
+import { ModalNovoProdutoComponent } from './components/pedidos/modal-novo-produto/modal-novo-produto.component';
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -40,6 +45,7 @@ const maskConfig: Partial<IConfig> = {
     ListaClientesComponent,
     NovoPedidoComponent,
     ListaPedidosComponent,
+    ModalNovoProdutoComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +63,14 @@ const maskConfig: Partial<IConfig> = {
     FieldsetModule,
     NgxMaskDirective,
     NgxMaskPipe,
+    DialogModule,
+    ConfirmDialogModule,
   ],
-  providers: [provideEnvironmentNgxMask(maskConfig)],
+  providers: [
+    provideEnvironmentNgxMask(maskConfig),
+    ConfirmationService,
+    MessageService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

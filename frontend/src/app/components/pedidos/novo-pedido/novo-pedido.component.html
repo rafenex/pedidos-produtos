@@ -1,7 +1,7 @@
 <p-fieldset legend="Pedido">
   <form>
     <div class="field grid">
-      <div class="col-12 md:col-6 mb-4">
+      <div class="col-12 mb-4">
         <label>Cliente</label>
         <select
           (ngModelChange)="verCliente($event)"
@@ -15,20 +15,79 @@
           </option>
         </select>
       </div>
-      <div class="col-12 md:col-6 mb-4">
-        <label>Produto</label>
-        <select
-          (ngModelChange)="verProduto($event)"
-          [(ngModel)]="selectedCliente"
-          [ngModelOptions]="{ standalone: true }"
-          pInputText
-          class="p-2 w-full"
+      <div class="col-12 mb-4" *ngIf="products.length > 0">
+        <p-table
+          #dt
+          [value]="products"
+          [rows]="10"
+          [globalFilterFields]="['nome', 'cor', 'quantidade', 'preco']"
+          [tableStyle]="{ 'min-width': '40rem' }"
+          [rowHover]="true"
+          dataKey="id"
         >
-          <option *ngFor="let produto of produtos" [ngValue]="produto">
-            {{ produto["produto"] }}
-          </option>
-        </select>
+          <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+              <h5 class="m-0">Produtos</h5>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Nome</th>
+              <th>Cor</th>
+              <th>Preço</th>
+              <th>Quantidade</th>
+              <th>Total</th>
+              <th>Ações</th>
+
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td>{{ product.nome }}</td>
+              <td>{{ product.cor }}</td>
+              <td>{{ product.preco }}</td>
+              <td>{{ product.quantidade }}</td>
+              <td>
+                {{ product.quantidade * product.preco | currency : "BRL" }}
+              </td>
+
+              <td>
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-trash"
+                  class="p-button-rounded p-button-warning"
+                  (click)="deleteProduct(product)"
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+            <div
+              *ngIf="products.length > 1"
+              class="flex align-items-center justify-content-between"
+            >
+              {{ products ? products.length : 0 }} produtos.
+            </div>
+            <div
+              *ngIf="products.length === 1"
+              class="flex align-items-center justify-content-between"
+            >
+              {{ products ? products.length : 0 }} produto.
+            </div>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="col-12 mb-4">
+        <app-modal-novo-produto></app-modal-novo-produto>
       </div>
     </div>
   </form>
 </p-fieldset>
+<p-confirmDialog
+  [style]="{ width: '450px' }"
+  acceptLabel="Sim"
+  rejectLabel="Não"
+>
+</p-confirmDialog>

@@ -1,51 +1,62 @@
-:host ::ng-deep .p-fieldset-legend {
-  background: var(--bluegray-900);
+/* :host ::ng-deep .p-fieldset-legend {
+  background: var(--gray-900);
   border: 0;
 }
 
 :host ::ng-deep .p-fieldset {
-  color: var(--bluegray-100);
-  background: var(--bluegray-800);
+  color: var(--gray-100);
+  background: var(--gray-800);
   border: 0;
 }
 
 :host ::ng-deep .p-inputtext {
-  background: var(--bluegray-900);
+  background: var(--gray-900);
   border: 0;
 }
 
 ::ng-deep .p-panelmenu .p-panelmenu-header > a {
-  background: var(--bluegray-900);
+  background: var(--gray-800);
   border: 0;
 }
 
 ::ng-deep .p-panelmenu .p-panelmenu-content {
-  background: var(--bluegray-900);
+  background: var(--gray-900);
   border: 0;
 }
 
 ::ng-deep .p-panelmenu .p-panelmenu-header.p-highlight > a {
-  background-color: var(--bluegray-900);
+  background-color: var(--gray-800);
 }
 
-::ng-deep .p-panelmenu .p-menuitem-content {
-  color: var(--bluegray-900);
+::ng-deep .p-menuitem-text {
+  color: var(--gray-100);
 }
 
-::ng-deep
-  .p-panelmenu
-  .p-panelmenu-content
-  .p-menuitem
-  .p-menuitem-link
-  .p-menuitem-text {
-  color: var(--bluegray-100);
+::ng-deep .p-menuitem-icon {
+  color: var(--gray-100);
 }
 
-::ng-deep
-  .p-panelmenu
-  .p-panelmenu-content
-  .p-menuitem
-  .p-menuitem-link
-  .p-menuitem-icon {
-  color: var(--bluegray-100);
+:host ::ng-deep td {
+  background-color: var(--gray-900);
+  border: 1px solid var(--gray-800) !important;
 }
+
+:host ::ng-deep th {
+  background-color: var(--gray-900) !important;
+  border: 1px solid var(--gray-800) !important;
+}
+
+:host ::ng-deep .p-paginator {
+  background-color: var(--gray-900);
+  border: 1px solid var(--gray-800) !important;
+}
+
+:host ::ng-deep .p-datatable input {
+  color: rgb(255, 245, 245);
+  background-color: var(--gray-900);
+  border: 1px solid var(--gray-800) !important;
+}
+
+:host ::ng-deep ::placeholder {
+  color: var(--gray-100);
+} */

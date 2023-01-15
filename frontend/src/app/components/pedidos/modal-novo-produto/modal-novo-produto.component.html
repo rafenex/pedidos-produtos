@@ -1,0 +1,61 @@
+<p-dialog header="Adicionar produto" [(visible)]="display">
+  <div class="field grid" style="max-width: 500px">
+    <div class="col-12 mb-4">
+      <label>Produto</label>
+      <select
+        (ngModelChange)="verProduto($event)"
+        [(ngModel)]="selectedProduto"
+        [ngModelOptions]="{ standalone: true }"
+        pInputText
+        class="p-2 w-full"
+      >
+        <option *ngFor="let produto of produtos" [ngValue]="produto">
+          {{ produto["produto"] }}
+        </option>
+      </select>
+    </div>
+    <div class="col-12 mb-4">
+      <label>Cor</label>
+      <input [(ngModel)]="cor" type="text" pInputText class="p-2 w-full" />
+    </div>
+    <div class="col-12 mb-4">
+      <label>Valor unitário</label>
+      <input [(ngModel)]="preco" type="number" pInputText class="p-2 w-full" />
+    </div>
+    <div class="col-12 mb-4">
+      <label>Quantidade</label>
+      <input
+        [(ngModel)]="quantidade"
+        type="number"
+        pInputText
+        class="p-2 w-full"
+      />
+    </div>
+    <div class="col-6">
+      <button
+        (click)="saveProduct()"
+        pButton
+        type="button"
+        label="Confirmar"
+        class="p-button-sm bg-black-alpha-80 text-white border-none p-2 w-full"
+      ></button>
+    </div>
+    <div class="col-6">
+      <button
+        (click)="display = false"
+        pButton
+        type="button"
+        label="Cancelar"
+        class="p-button-sm bg-black-alpha-80 text-white border-none p-2 w-full"
+      ></button>
+    </div>
+  </div>
+</p-dialog>
+<button
+  (click)="showDialog()"
+  pButton
+  type="button"
+  label="Adicionar produto"
+  icon="pi pi-plus"
+  class="p-button-sm bg-black-alpha-80 text-white border-none"
+></button>

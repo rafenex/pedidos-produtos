@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cliente } from '../models/clientes';
+import { ProdutoPedido } from '../models/produtoNovo';
 import { Produto } from '../models/produtos';
 
 @Injectable({
@@ -21,5 +22,19 @@ export class PedidoService {
       .get('assets/clienteApi.json')
       .toPromise()
       .then((res: any) => <Cliente[]>res.data);
+  }
+
+  async getProdutosPedido() {
+    return await this.http
+      .get('assets/produtoPedio.json')
+      .toPromise()
+      .then((res: any) => <ProdutoPedido[]>res.data);
+  }
+
+  async setProdutosPedido(produto: ProdutoPedido) {
+    return await this.http
+      .post('assets/produtoPedio.json', produto)
+      .toPromise()
+      .then((res: any) => console.log(res.data));
   }
 }
