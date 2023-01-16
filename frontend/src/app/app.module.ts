@@ -35,9 +35,20 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
-import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+  TranslateStore,
+} from '@ngx-translate/core';
+
 registerLocaleData(ptBr);
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -77,16 +88,22 @@ const maskConfig: Partial<IConfig> = {
     ToastModule,
     CalendarModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
+
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
-    {
-      provide: DEFAULT_CURRENCY_CODE,
-      useValue: 'BRL',
-    },
     provideEnvironmentNgxMask(maskConfig),
     ConfirmationService,
     MessageService,
+    TranslateService,
+    TranslateStore,
   ],
   bootstrap: [AppComponent],
 })
