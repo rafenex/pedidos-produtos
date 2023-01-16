@@ -1,55 +1,68 @@
+<p-toast></p-toast>
 <p-dialog header="Adicionar produto" [(visible)]="display">
-  <div class="field grid" style="max-width: 500px">
-    <div class="col-12 mb-4">
-      <label>Produto</label>
-      <select
-        (ngModelChange)="verProduto($event)"
-        [(ngModel)]="selectedProduto"
-        [ngModelOptions]="{ standalone: true }"
-        pInputText
-        class="p-2 w-full"
-      >
-        <option *ngFor="let produto of produtos" [ngValue]="produto">
-          {{ produto["produto"] }}
-        </option>
-      </select>
+  <form [formGroup]="formProdutosPedido" (ngSubmit)="onSubmit()">
+    <div class="field grid" style="max-width: 500px">
+      <div class="col-12 mb-4">
+        <label>Produto</label>
+        <select formControlName="nome" pInputText class="p-2 w-full">
+          <option *ngFor="let produto of produtos" [ngValue]="produto.produto">
+            {{ produto["produto"] }}
+          </option>
+        </select>
+      </div>
+      <div class="col-12 mb-4">
+        <label>Cor</label>
+        <select formControlName="cor" pInputText class="p-2 w-full">
+          <option value="Azul">Azul</option>
+          <option value="Amarelo">Amarelo</option>
+          <option value="Branco">Branco</option>
+          <option value="Cinza">Cinza</option>
+          <option value="Marrom">Marrom</option>
+          <option value="Preto">Preto</option>
+          <option value="Prata">Prata</option>
+          <option value="Rosa">Rosa</option>
+          <option value="Verde">Verde</option>
+          <option value="Vermelho">Vermelho</option>
+        </select>
+      </div>
+      <div class="col-12 mb-4">
+        <label>Valor unitário</label>
+        <input
+          formControlName="preco"
+          type="number"
+          pInputText
+          class="p-2 w-full"
+        />
+      </div>
+      <div class="col-12 mb-4">
+        <label>Quantidade</label>
+        <input
+          formControlName="quantidade"
+          type="number"
+          pInputText
+          class="p-2 w-full"
+        />
+      </div>
+      <div class="col-6">
+        <button
+          [disabled]="!formProdutosPedido.valid"
+          pButton
+          type="submit"
+          label="Confirmar"
+          class="p-button-sm bg-black-alpha-80 text-white border-none p-2 w-full"
+        ></button>
+      </div>
+      <div class="col-6">
+        <button
+          (click)="display = false"
+          pButton
+          type="button"
+          label="Cancelar"
+          class="p-button-sm bg-black-alpha-80 text-white border-none p-2 w-full"
+        ></button>
+      </div>
     </div>
-    <div class="col-12 mb-4">
-      <label>Cor</label>
-      <input [(ngModel)]="cor" type="text" pInputText class="p-2 w-full" />
-    </div>
-    <div class="col-12 mb-4">
-      <label>Valor unitário</label>
-      <input [(ngModel)]="preco" type="number" pInputText class="p-2 w-full" />
-    </div>
-    <div class="col-12 mb-4">
-      <label>Quantidade</label>
-      <input
-        [(ngModel)]="quantidade"
-        type="number"
-        pInputText
-        class="p-2 w-full"
-      />
-    </div>
-    <div class="col-6">
-      <button
-        (click)="saveProduct()"
-        pButton
-        type="button"
-        label="Confirmar"
-        class="p-button-sm bg-black-alpha-80 text-white border-none p-2 w-full"
-      ></button>
-    </div>
-    <div class="col-6">
-      <button
-        (click)="display = false"
-        pButton
-        type="button"
-        label="Cancelar"
-        class="p-button-sm bg-black-alpha-80 text-white border-none p-2 w-full"
-      ></button>
-    </div>
-  </div>
+  </form>
 </p-dialog>
 <button
   (click)="showDialog()"

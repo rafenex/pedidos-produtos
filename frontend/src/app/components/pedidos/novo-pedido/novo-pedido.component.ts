@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Cliente } from 'src/app/models/clientes';
 import { ProdutoPedido } from 'src/app/models/produtoNovo';
-import { Produto } from 'src/app/models/produtos';
 import { PedidoService } from 'src/app/service/pedido.service';
 import { products } from 'src/app/models/produtoNovo';
 @Component({
@@ -11,14 +10,12 @@ import { products } from 'src/app/models/produtoNovo';
   styleUrls: ['./novo-pedido.component.css'],
 })
 export class NovoPedidoComponent {
+  entrega!: Date;
   clientes: Cliente[] = [];
   productDialog: boolean = false;
-
   product: ProdutoPedido = {};
   products: ProdutoPedido[] = [];
   selectedProducts: ProdutoPedido[] = [];
-
-  statuses: any[] = [];
   selectedCliente!: Cliente;
 
   constructor(
@@ -26,9 +23,6 @@ export class NovoPedidoComponent {
     private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {}
-  verCliente(event: any) {
-    console.log(event);
-  }
 
   getClientes() {
     this.pedidoService.getClientes().then((cli: any) => {
@@ -51,8 +45,8 @@ export class NovoPedidoComponent {
         this.product = {};
         this.messageService.add({
           severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Deleted',
+          summary: 'DELETADO',
+          detail: 'Produto apagado',
           life: 3000,
         });
       },

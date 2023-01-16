@@ -4,6 +4,7 @@ import { ProdutoPedido } from 'src/app/models/produtoNovo';
 import { Produto } from 'src/app/models/produtos';
 import { PedidoService } from 'src/app/service/pedido.service';
 import { products } from 'src/app/models/produtoNovo';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-novo-produto',
@@ -11,61 +12,27 @@ import { products } from 'src/app/models/produtoNovo';
   styleUrls: ['./modal-novo-produto.component.css'],
 })
 export class ModalNovoProdutoComponent {
-  quantidade!: number;
-  preco!: string;
-  cor!: string;
-
   submitted: boolean = false;
   produtos: Produto[] = [];
   selectedProduto!: Produto;
   product: ProdutoPedido = {};
 
   display: boolean = false;
-  messageService: MessageService = new MessageService();
+
   productDialog: boolean = false;
-  verProduto(event: any) {
-    console.log(event);
-  }
+
   showDialog() {
     this.display = true;
   }
 
-  constructor(private pedidoService: PedidoService) {}
+  constructor(
+    private pedidoService: PedidoService,
+    private messageService: MessageService
+  ) {}
   getProdutos() {
     this.pedidoService.getProdutos().then((prod: any) => {
       this.produtos = prod;
     });
-  }
-  saveProduct() {
-    this.submitted = true;
-    this.product.nome = this.selectedProduto.produto;
-    this.product.quantidade = this.quantidade;
-    this.product.cor = this.cor;
-    this.product.preco = this.preco;
-
-    if (this.product.nome!.trim()) {
-      if (this.product.id) {
-        products[this.findIndexById(this.product.id) as any] = this.product;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Updated',
-          life: 3000,
-        });
-      } else {
-        this.product.id = this.createId();
-        products.push(this.product);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Created',
-          life: 3000,
-        });
-      }
-
-      this.display = false;
-      this.product = {};
-    }
   }
 
   findIndexById(id: string): number {
@@ -79,15 +46,49 @@ export class ModalNovoProdutoComponent {
 
     return index;
   }
-  createId(): string {
-    let id = '';
-    var chars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (var i = 0; i < 5; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
+
+  formProdutosPedido = new FormGroup({
+    nome: new FormControl('', [Validators.required]),
+    cor: new FormControl('', [Validators.required]),
+    preco: new FormControl('', [Validators.required]),
+    quantidade: new FormControl('', [Validators.required]),
+  });
+
+  get form(): any {
+    return this.formProdutosPedido.controls;
   }
+
+  onSubmit(): void {
+    let obj: ProdutoPedido = {
+      id: undefined,
+      nome: this.formProdutosPedido.value.nome!,
+      cor: this.formProdutosPedido.value.cor!,
+      preco: this.formProdutosPedido.value.preco!,
+      quantidade: Number(this.formProdutosPedido.value.quantidade!),
+    };
+    if (obj.nome!.trim()) {
+      if (this.product.id) {
+        products[this.findIndexById(obj.id!) as any] = this.product;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'ADICIONADO',
+          detail: 'Produto adicionado',
+          life: 3000,
+        });
+      } else {
+        products.push(obj);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'ADICIONADO',
+          detail: 'Produto adicionado',
+          life: 3000,
+        });
+      }
+      this.formProdutosPedido.reset();
+      this.display = false;
+    }
+  }
+
   ngOnInit() {
     this.getProdutos();
   }
