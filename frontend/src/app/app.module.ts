@@ -44,7 +44,7 @@ import {
   TranslateService,
   TranslateStore,
 } from '@ngx-translate/core';
-
+import { InputTextareaModule } from 'primeng/inputtextarea';
 registerLocaleData(ptBr);
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -88,6 +88,7 @@ const maskConfig: Partial<IConfig> = {
     ToastModule,
     CalendarModule,
     HttpClientModule,
+    InputTextareaModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

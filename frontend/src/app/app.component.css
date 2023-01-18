@@ -57,6 +57,11 @@
   border: 1px solid var(--gray-800) !important;
 }
 
+
+
 :host ::ng-deep ::placeholder {
   color: var(--gray-100);
 } */
+:host ::ng-deep .p-datatable {
+  font-size: 12px;
+}

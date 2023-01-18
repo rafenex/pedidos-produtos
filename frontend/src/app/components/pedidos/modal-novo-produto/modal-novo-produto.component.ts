@@ -35,18 +35,6 @@ export class ModalNovoProdutoComponent {
     });
   }
 
-  findIndexById(id: string): number {
-    let index = -1;
-    for (let i = 0; i < products.length; i++) {
-      if (products[i].id === id) {
-        index = i;
-        break;
-      }
-    }
-
-    return index;
-  }
-
   formProdutosPedido = new FormGroup({
     nome: new FormControl('', [Validators.required]),
     cor: new FormControl('', [Validators.required]),
@@ -63,30 +51,20 @@ export class ModalNovoProdutoComponent {
       id: undefined,
       nome: this.formProdutosPedido.value.nome!,
       cor: this.formProdutosPedido.value.cor!,
-      preco: this.formProdutosPedido.value.preco!,
+      preco: Number(this.formProdutosPedido.value.preco!),
       quantidade: Number(this.formProdutosPedido.value.quantidade!),
     };
     if (obj.nome!.trim()) {
-      if (this.product.id) {
-        products[this.findIndexById(obj.id!) as any] = this.product;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'ADICIONADO',
-          detail: 'Produto adicionado',
-          life: 3000,
-        });
-      } else {
-        products.push(obj);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'ADICIONADO',
-          detail: 'Produto adicionado',
-          life: 3000,
-        });
-      }
-      this.formProdutosPedido.reset();
-      this.display = false;
+      products.push(obj);
+      this.messageService.add({
+        severity: 'success',
+        summary: 'ADICIONADO',
+        detail: 'Produto adicionado',
+        life: 3000,
+      });
     }
+    this.formProdutosPedido.reset();
+    this.display = false;
   }
 
   ngOnInit() {

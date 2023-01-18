@@ -21,7 +21,7 @@ export class ClienteService {
   async getCidades(estado: string) {
     return await this.http
       .get(
-        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estado}/distritos`
+        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estado}/distritos?orderBy=nome`
       )
       .toPromise();
   }

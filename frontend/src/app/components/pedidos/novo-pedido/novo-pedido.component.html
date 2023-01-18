@@ -1,95 +1,169 @@
-<p-fieldset legend="Pedido">
-  <form>
-    <div class="field grid">
-      <div class="col-12 mb-4">
-        <label>Cliente</label>
-        <select
-          [(ngModel)]="selectedCliente"
-          [ngModelOptions]="{ standalone: true }"
-          pInputText
-          class="p-2 w-full"
-        >
-          <option *ngFor="let cliente of clientes" [ngValue]="cliente">
-            {{ cliente["nome"] }}
-          </option>
-        </select>
-      </div>
-      <div class="col-12 mb-4" *ngIf="products.length > 0">
-        <p-table
-          #dt
-          [value]="products"
-          [rows]="10"
-          [globalFilterFields]="['nome', 'cor', 'quantidade', 'preco']"
-          [tableStyle]="{ 'min-width': '40rem' }"
-          [rowHover]="true"
-          dataKey="id"
-        >
-          <ng-template pTemplate="caption">
-            <div class="flex align-items-center justify-content-between">
-              <h5 class="m-0">Produtos</h5>
+<div class="grid">
+  <div class="md:col-6 col-12 mb-2">
+    <p-fieldset legend="Pedido">
+      <form [formGroup]="formNovoPedido" (ngSubmit)="onSubmit()">
+        <div>
+          <div class="field grid">
+            <div class="col-12 mt-2">
+              <span class="p-float-label">
+                <p-dropdown
+                  [style]="{ width: '100%' }"
+                  placeholder="Cliente"
+                  inputId="dropdown"
+                  [options]="clientes"
+                  formControlName="cliente"
+                  optionLabel="nome"
+                ></p-dropdown>
+                <label for="dropdown">Cliente</label>
+              </span>
             </div>
-          </ng-template>
-          <ng-template pTemplate="header">
-            <tr>
-              <th>Nome</th>
-              <th>Cor</th>
-              <th>Preço</th>
-              <th>Quantidade</th>
-              <th>Total</th>
-              <th>Ações</th>
+            <div class="col-12 mt-5">
+              <span class="p-float-label">
+                <p-calendar
+                  [style]="{ width: '100%' }"
+                  placeholder="Entrega"
+                  inputId="calendar"
+                  formControlName="data_entrega"
+                  placeholder="Entrega"
+                ></p-calendar>
+                <label for="calendar">Entrega</label>
+              </span>
+            </div>
 
-              <th></th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-product>
-            <tr>
-              <td>{{ product.nome }}</td>
-              <td>{{ product.cor }}</td>
-              <td>{{ product.preco }}</td>
-              <td>{{ product.quantidade }}</td>
-              <td>
-                {{ product.quantidade * product.preco | currency : "BRL" }}
-              </td>
-
-              <td>
-                <button
-                  pButton
-                  pRipple
-                  icon="pi pi-trash"
-                  class="p-button-rounded p-button-warning"
-                  (click)="deleteProduct(product)"
-                ></button>
-              </td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="summary">
             <div
-              *ngIf="products.length > 1"
-              class="flex align-items-center justify-content-between"
+              class="col-12 mt-5"
+              *ngIf="formNovoPedido.value.pagamento !== 'Outro'"
             >
-              {{ products ? products.length : 0 }} produtos.
+              <span class="p-float-label">
+                <p-dropdown
+                  [style]="{ width: '100%' }"
+                  placeholder="Pagamento"
+                  inputId="dropdown"
+                  formControlName="pagamento"
+                  [options]="[
+                    'À vista',
+                    '1/30',
+                    '1/30/60',
+                    '1/30/60/90',
+                    'Outro'
+                  ]"
+                ></p-dropdown>
+                <label for="dropdown">Pagamento</label>
+              </span>
             </div>
             <div
-              *ngIf="products.length === 1"
-              class="flex align-items-center justify-content-between"
+              class="col-12 mt-5"
+              *ngIf="formNovoPedido.value.pagamento === 'Outro'"
             >
-              {{ products ? products.length : 0 }} produto.
+              <span class="p-float-label">
+                <input
+                  [style]="{ width: '100%' }"
+                  inputId="outropagamento"
+                  [(ngModel)]="outroPagamento"
+                  [ngModelOptions]="{ standalone: true }"
+                  id="float-input"
+                  type="text"
+                  pInputText
+                />
+                <label for="outropagamento">Pagamento</label>
+              </span>
             </div>
-          </ng-template>
-        </p-table>
-      </div>
-      <div class="col-12 mb-4">
-        <app-modal-novo-produto></app-modal-novo-produto>
-      </div>
-      <div class="col-12 mb-4">
-        <p-calendar></p-calendar>
-      </div>
+            <div class="col-12 mt-5">
+              <span class="p-float-label">
+                <textarea
+                  [style]="{ width: '100%' }"
+                  formControlName="observacoes"
+                  inputId="obs"
+                  [rows]="5"
+                  [cols]="30"
+                  pInputTextarea
+                  [autoResize]="true"
+                ></textarea>
+                <label for="obs">Observações</label>
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <button
+              [style]="{ width: '50%', margin: '0px 0px 00px 25%' }"
+              pButton
+              type="submit"
+              label="Finalizar"
+              class="p-button-sm bg-gray-900 text-white border-none p-2"
+            ></button>
+          </div>
+        </div>
+      </form>
+    </p-fieldset>
+    <p-confirmDialog
+      [style]="{ width: '450px' }"
+      acceptLabel="Sim"
+      rejectLabel="Não"
+    >
+    </p-confirmDialog>
+  </div>
+
+  <div class="md:col-6 col-12">
+    <app-modal-novo-produto></app-modal-novo-produto>
+
+    <div *ngIf="products.length > 0">
+      <p-table
+        [scrollable]="true"
+        #dt
+        [value]="products"
+        [rows]="10"
+        [globalFilterFields]="['nome', 'cor', 'quantidade', 'preco']"
+        [rowHover]="true"
+        dataKey="id"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome</th>
+            <th>Cor</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+            <th>Ações</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td>{{ product.nome }}</td>
+            <td>{{ product.cor }}</td>
+            <td>{{ product.preco }}</td>
+            <td>{{ product.quantidade }}</td>
+            <td>
+              {{ product.quantidade * product.preco | currency : "BRL" }}
+            </td>
+
+            <td>
+              <button
+                pButton
+                pRipple
+                (click)="deleteProduct(product)"
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-text"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div
+            *ngIf="products.length > 1"
+            class="flex align-items-center justify-content-between"
+          >
+            {{ products ? products.length : 0 }} produtos.
+          </div>
+          <div
+            *ngIf="products.length === 1"
+            class="flex align-items-center justify-content-between"
+          >
+            {{ products ? products.length : 0 }} produto. {{ total }}
+          </div>
+        </ng-template>
+      </p-table>
     </div>
-  </form>
-</p-fieldset>
-<p-confirmDialog
-  [style]="{ width: '450px' }"
-  acceptLabel="Sim"
-  rejectLabel="Não"
->
-</p-confirmDialog>
+  </div>
+</div>
