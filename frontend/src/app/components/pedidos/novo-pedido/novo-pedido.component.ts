@@ -5,13 +5,14 @@ import { ProdutoPedido } from 'src/app/models/produtoNovo';
 import { PedidoService } from 'src/app/service/pedido.service';
 import { products } from 'src/app/models/produtoNovo';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-novo-pedido',
   templateUrl: './novo-pedido.component.html',
   styleUrls: ['./novo-pedido.component.css'],
 })
 export class NovoPedidoComponent {
-  total = 0;
+  produtosAdicionados: ProdutoPedido[] = [];
   entrega!: Date;
   clientes: Cliente[] = [];
   productDialog: boolean = false;
@@ -30,8 +31,18 @@ export class NovoPedidoComponent {
     cliente: new FormControl('', [Validators.required]),
     data_entrega: new FormControl('', [Validators.required]),
     observacoes: new FormControl(''),
+    frete: new FormControl('', [Validators.required]),
   });
 
+  get total() {
+    let tot = 0;
+    this.products.forEach((p) => {
+      tot = p.preco! * p.quantidade! + tot;
+      this.produtosAdicionados.push(p);
+    });
+
+    return tot + Number(this.formNovoPedido.value.frete);
+  }
   get form(): any {
     return this.formNovoPedido.controls;
   }
@@ -39,6 +50,11 @@ export class NovoPedidoComponent {
     let obj = {
       cliente: this.formNovoPedido.value.cliente,
       produtos: this.products,
+      frete: this.formNovoPedido.value.frete,
+      observacoes: this.formNovoPedido.value.observacoes,
+      pagamento: this.outroPagamento
+        ? this.outroPagamento
+        : this.formNovoPedido.value.pagamento,
       data_entrega: new Date(
         this.formNovoPedido.value.data_entrega!
       ).toLocaleDateString('pt-BR'),
@@ -77,15 +93,5 @@ export class NovoPedidoComponent {
   ngOnInit() {
     this.getClientes();
     this.products = products;
-    this.calcularTotal();
-  }
-
-  calcularTotal() {
-    let total = 0;
-    for (let p of this.products) {
-      total += p.preco!;
-    }
-
-    this.total = total;
   }
 }

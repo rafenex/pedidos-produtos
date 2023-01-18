@@ -29,7 +29,19 @@
                 <label for="calendar">Entrega</label>
               </span>
             </div>
-
+            <div class="col-12 mt-5">
+              <span class="p-float-label">
+                <input
+                  [style]="{ width: '100%' }"
+                  inputId="frete"
+                  formControlName="frete"
+                  id="float-input"
+                  type="number"
+                  pInputText
+                />
+                <label for="frete">Frete</label>
+              </span>
+            </div>
             <div
               class="col-12 mt-5"
               *ngIf="formNovoPedido.value.pagamento !== 'Outro'"
@@ -83,15 +95,30 @@
               </span>
             </div>
           </div>
-
-          <div>
-            <button
-              [style]="{ width: '50%', margin: '0px 0px 00px 25%' }"
-              pButton
-              type="submit"
-              label="Finalizar"
-              class="p-button-sm bg-gray-900 text-white border-none p-2"
-            ></button>
+          <div *ngIf="products.length > 1" class="flex justify-content-between">
+            <div>{{ products ? products.length : 0 }} produtos.</div>
+            <div>Total: {{ total | currency : "BRL" }}</div>
+          </div>
+          <div
+            *ngIf="products.length === 1"
+            class="flex justify-content-between"
+          >
+            <div>{{ products ? products.length : 0 }} produto.</div>
+            <div>Total: {{ total | currency : "BRL" }}</div>
+          </div>
+          <div class="flex justify-content-between mt-4">
+            <div>
+              <button
+                [disabled]="products.length < 1 || !formNovoPedido.valid"
+                pButton
+                type="submit"
+                label="Finalizar"
+                class="p-button-sm bg-gray-900 text-white border-none"
+              ></button>
+            </div>
+            <div>
+              <app-modal-novo-produto></app-modal-novo-produto>
+            </div>
           </div>
         </div>
       </form>
@@ -105,9 +132,7 @@
   </div>
 
   <div class="md:col-6 col-12">
-    <app-modal-novo-produto></app-modal-novo-produto>
-
-    <div *ngIf="products.length > 0">
+    <div *ngIf="produtosAdicionados.length > 0">
       <p-table
         [scrollable]="true"
         #dt
@@ -129,10 +154,54 @@
         </ng-template>
         <ng-template pTemplate="body" let-product>
           <tr>
-            <td>{{ product.nome }}</td>
-            <td>{{ product.cor }}</td>
-            <td>{{ product.preco }}</td>
-            <td>{{ product.quantidade }}</td>
+            <td [pEditableColumn]="product.nome" pEditableColumnField="nome">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="product.nome" />
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{ product.nome }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td [pEditableColumn]="product.cor" pEditableColumnField="cor">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="product.cor" />
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{ product.cor }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td [pEditableColumn]="product.preco" pEditableColumnField="preco">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="product.preco" />
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{ product.preco }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td
+              [pEditableColumn]="product.quantidade"
+              pEditableColumnField="quantidade"
+            >
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input
+                    pInputText
+                    type="text"
+                    [(ngModel)]="product.quantidade"
+                  />
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{ product.quantidade }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+
             <td>
               {{ product.quantidade * product.preco | currency : "BRL" }}
             </td>
@@ -148,20 +217,6 @@
               ></button>
             </td>
           </tr>
-        </ng-template>
-        <ng-template pTemplate="summary">
-          <div
-            *ngIf="products.length > 1"
-            class="flex align-items-center justify-content-between"
-          >
-            {{ products ? products.length : 0 }} produtos.
-          </div>
-          <div
-            *ngIf="products.length === 1"
-            class="flex align-items-center justify-content-between"
-          >
-            {{ products ? products.length : 0 }} produto. {{ total }}
-          </div>
         </ng-template>
       </p-table>
     </div>

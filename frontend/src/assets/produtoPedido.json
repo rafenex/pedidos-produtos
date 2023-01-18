@@ -1,3 +1,11 @@
 {
-  "data": []
+  "data": [
+    {
+      "id": "10",
+      "nome": "Caneta",
+      "quantidade": 100,
+      "preco": 1.9,
+      "cor": "azul"
+    }
+  ]
 }
